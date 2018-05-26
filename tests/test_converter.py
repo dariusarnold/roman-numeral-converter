@@ -28,7 +28,7 @@ class TestSimpleCombinations(unittest.TestCase):
     """
 
     def setUp(self):
-        self.c = Converter();
+        self.c = Converter()
 
     def test_numeral_ii(self):
         self.assertEqual(self.c.convert('II'), 2)
@@ -37,7 +37,8 @@ class TestSimpleCombinations(unittest.TestCase):
         self.assertEqual(self.c.convert('MDCLXVI'), 1666)
 
     def test_numeral(self):
-        self.assertEqual(self.c.convert(('MMXVIII')), 2018)
+        self.assertEqual(self.c.convert('MMXVIII'), 2018)
+
 
 class TestSubtractiveCombinations(unittest.TestCase):
 
@@ -55,6 +56,7 @@ class TestSubtractiveCombinations(unittest.TestCase):
 
     def test_numeral_mmmcxcii(self):
         self.assertEqual(self.c.convert('MMMCXCII'), 3192)
+
 
 class TestInvalidInput(unittest.TestCase):
 
