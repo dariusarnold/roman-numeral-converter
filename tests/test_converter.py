@@ -56,5 +56,27 @@ class TestSubtractiveCombinations(unittest.TestCase):
     def test_numeral_mmmcxcii(self):
         self.assertEqual(self.c.convert('MMMCXCII'), 3192)
 
+class TestInvalidInput(unittest.TestCase):
+
+    def setUp(self):
+        self.c = Converter()
+
+    def test_digit(self):
+        with self.assertRaises(TypeError):
+            self.c.convert(6)
+
+    def test_number(self):
+        with self.assertRaises(TypeError):
+            self.c.convert(314)
+
+    def test_invalid_literals(self):
+        with self.assertRaises(ValueError):
+            self.c.convert('UI')
+
+    def test_objects(self):
+        with self.assertRaises(TypeError):
+            self.c.convert(object())
+
+
 if __name__ == '__main__':
     unittest.main()
