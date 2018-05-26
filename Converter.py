@@ -13,6 +13,24 @@ class Converter():
     def __init__(self):
         pass
 
+    def _convert_literal(self, l):
+        """
+        Convert literal l to decimal
+        :param l: Roman literal
+        :type l: str
+        :return: Decimal value of l
+        :rtype: int
+        :raises:
+            ValueError: when the given literal is not a roman literal
+            TypeError: when l is not of type string
+        """
+        if type(l) is not str:
+            raise TypeError('{} is not a valid roman literal'.format(l))
+        try:
+            return self.values[l]
+        except KeyError:
+            raise ValueError('{} is not a valid roman literal'.format(l))
+
     def convert(self, num):
         """
         Convert a string containing roman numerals to a decimal number
@@ -22,10 +40,13 @@ class Converter():
         :rtype: int
         """
 
-        num = list(num)
-        value = Converter.values[num[-1]]
+        try:
+            num = list(num)
+        except TypeError:
+            raise TypeError
+        value = self._convert_literal(num[-1])
         for current, next in zip(num, num[1:]):
-            if Converter.values[next] > Converter.values[current]:
-                value -= 2*Converter.values[current]
-            value += Converter.values[current]
+            if self._convert_literal(next) > self._convert_literal(current):
+                value -= 2 * self._convert_literal(current)
+            value += self._convert_literal(current)
         return value
